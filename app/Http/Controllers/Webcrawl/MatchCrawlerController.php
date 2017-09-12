@@ -45,6 +45,7 @@ class MatchCrawlerController extends Controller
         dump('we need to fix this shit');
         dd($matchRow);
 
+		// can we end this shit please
 
         $team1 = $crawler->filter('.infobox_matches_content .team-left .team-template-text a')->each(function ($node) {
             $title = $node->extract('title');
