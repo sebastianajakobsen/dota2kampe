@@ -42,6 +42,7 @@ class MatchCrawlerController extends Controller
         }
 
         $matchRow = array_values($matchRow);
+        // fix this shit noaaaaw ty mate
         dump('we need to fix this shit');
         dd($matchRow);
 
