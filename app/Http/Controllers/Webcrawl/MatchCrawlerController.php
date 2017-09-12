@@ -14,7 +14,6 @@ use DateTimeZone;
 
 
 // we need to fix this shit
-
 class MatchCrawlerController extends Controller
 {
     //
@@ -43,6 +42,7 @@ class MatchCrawlerController extends Controller
         }
 
         $matchRow = array_values($matchRow);
+        dump('we need to fix this shit');
         dd($matchRow);
 
 
