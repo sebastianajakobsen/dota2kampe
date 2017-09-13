@@ -41,7 +41,7 @@ class PlayerController extends Controller
                 $player->team_id = $team->id;
             }
         }
-
+// test
         if($request->land){
             $country = country::findOrFail($request->land);
             if($country) {
