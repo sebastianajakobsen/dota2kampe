@@ -63,6 +63,9 @@ class MatchCrawlerController extends Controller
         });
 
 
+        // NEW THING HERE OR SOMETHING
+
+
         // GET TBD TEAMS so you can remove them after and only have the tournaments with teams left.
         // Else they crawler is going to unsort tournament so they dont match to the matches and teams :(
         // example = tournaments results 62 but only 32 teams1 & teams 2 BC the others are TBD so we have to remove alle the tournaments that we are not going to use
