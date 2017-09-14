@@ -42,8 +42,24 @@ class MatchCrawlerController extends Controller
         }
 
         $matchRow = array_values($matchRow);
-        // fix this shit noaaaaw ty mate
-        dump('we need to fix this shit');
+
+
+        function getTextBetweenTags($string, $tagname) {
+            $pattern = "/<$tagname ?.*>(.*)<\/$tagname>/";
+            preg_match($pattern, $string, $matches);
+            return $matches[1];
+        }
+
+
+
+
+
+        foreach($matchRow as $row) {
+            $txt = getTextBetweenTags($row, "tr");
+            dd($txt);
+        }
+
+
         dd($matchRow);
 
 		// can we end this shit please
