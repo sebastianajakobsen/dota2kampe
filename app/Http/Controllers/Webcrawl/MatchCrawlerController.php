@@ -26,7 +26,7 @@ class MatchCrawlerController extends Controller
 
         // Go to the wiki.teamliquid.net team page
         $crawler = $client->request('GET', 'http://wiki.teamliquid.net/dota2/Liquipedia:Upcoming_and_ongoing_matches');
-        
+
 
         $team1 = $crawler->filter('.infobox_matches_content .team-left .team-template-team2-short')->each(function ($node) {
             $title = $node->extract('data-highlightingclass');
@@ -34,8 +34,6 @@ class MatchCrawlerController extends Controller
             return $title[0];
 
         });
-
-
 
         $team2 = $crawler->filter('.infobox_matches_content .team-right .team-template-team-short')->each(function ($node) {
             $title = $node->extract('data-highlightingclass');
