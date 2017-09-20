@@ -11,26 +11,26 @@
 |
 */
 
-Route::get('/', array('as' => 'frontpage', 'uses' => 'FrontpageController@frontpage'));
+Route::get('/', ['as' => 'frontpage', 'uses' => 'FrontpageController@frontpage']);
 
-Route::get('/crawlTeams', array('as' => 'crawlTeams', 'uses' => 'Webcrawl\TeamCrawlerController@crawlTeams'));
+Route::get('/crawlTeams', ['as' => 'crawlTeams', 'uses' => 'Webcrawl\TeamCrawlerController@crawlTeams']);
 
-Route::get('/crawlTournamentsPremierEvents', array('as' => 'crawlTournamentsPremierEvents', 'uses' => 'Webcrawl\TournamentCrawlerController@crawlTournamentsPremierEvents'));
-Route::get('/crawlTournamentsMajorEvents', array('as' => 'crawlTournamentsMajorEvents', 'uses' => 'Webcrawl\TournamentCrawlerController@crawlTournamentsMajorEvents'));
-Route::get('/crawlTournamentsQualifiers', array('as' => 'crawlTournamentsQualifiers', 'uses' => 'Webcrawl\TournamentCrawlerController@crawlTournamentsQualifiers'));
-Route::get('/crawlTournamentsMinorEvents', array('as' => 'crawlTournamentsMinorEvents', 'uses' => 'Webcrawl\TournamentCrawlerController@crawlTournamentsMinorEvents'));
+Route::get('/crawlTournamentsPremierEvents', ['as' => 'crawlTournamentsPremierEvents', 'uses' => 'Webcrawl\TournamentCrawlerController@crawlTournamentsPremierEvents']);
+Route::get('/crawlTournamentsMajorEvents', ['as' => 'crawlTournamentsMajorEvents', 'uses' => 'Webcrawl\TournamentCrawlerController@crawlTournamentsMajorEvents']);
+Route::get('/crawlTournamentsQualifiers', ['as' => 'crawlTournamentsQualifiers', 'uses' => 'Webcrawl\TournamentCrawlerController@crawlTournamentsQualifiers']);
+Route::get('/crawlTournamentsMinorEvents', ['as' => 'crawlTournamentsMinorEvents', 'uses' => 'Webcrawl\TournamentCrawlerController@crawlTournamentsMinorEvents']);
 
-Route::get('/crawlTournamentsMatches', array('as' => 'crawlTournamentsMatches', 'uses' => 'Webcrawl\MatchCrawlerController@crawlTournamentsMatches'));
+Route::get('/crawlTournamentsMatches', ['as' => 'crawlTournamentsMatches', 'uses' => 'Webcrawl\MatchCrawlerController@crawlTournamentsMatches']);
 
-Route::get('/crawlPlayers', array('as' => 'crawlPlayers', 'uses' => 'Webcrawl\PlayerCrawlerController@crawlPlayers'));
-Route::get('/crawlPlayersImage', array('as' => 'crawlPlayersImage', 'uses' => 'Webcrawl\PlayerCrawlerController@crawlPlayersImage'));
-Route::get('/crawlPlayersMMR', array('as' => 'crawlPlayersMMR', 'uses' => 'Webcrawl\PlayerCrawlerController@crawlPlayersMMR'));
+Route::get('/crawlPlayers', ['as' => 'crawlPlayers', 'uses' => 'Webcrawl\PlayerCrawlerController@crawlPlayers']);
+Route::get('/crawlPlayersImage', ['as' => 'crawlPlayersImage', 'uses' => 'Webcrawl\PlayerCrawlerController@crawlPlayersImage']);
+Route::get('/crawlPlayersMMR', ['as' => 'crawlPlayersMMR', 'uses' => 'Webcrawl\PlayerCrawlerController@crawlPlayersMMR']);
 
 // Players >Rankings controller
-//Route::get('/getPlayersRankingsAmericas', array('as' => 'getPlayersRankingsAmericas', 'uses' => 'PlayerRankingController@getPlayersRankingsAmericas'));
-//Route::get('/getPlayersRankingsEurope', array('as' => 'getPlayersRankingsEurope', 'uses' => 'PlayerRankingController@getPlayersRankingsEurope'));
-//Route::get('/getPlayersRankingsSEA', array('as' => 'getPlayersRankingsSEA', 'uses' => 'PlayerRankingController@getPlayersRankingsSEA'));
-//Route::get('/getPlayersRankingsChina', array('as' => 'getPlayersRankingsChina', 'uses' => 'PlayerRankingController@getPlayersRankingsChina'));
+//Route::get('/getPlayersRankingsAmericas', ['as' => 'getPlayersRankingsAmericas', 'uses' => 'PlayerRankingController@getPlayersRankingsAmericas']);
+//Route::get('/getPlayersRankingsEurope', ['as' => 'getPlayersRankingsEurope', 'uses' => 'PlayerRankingController@getPlayersRankingsEurope']);
+//Route::get('/getPlayersRankingsSEA', ['as' => 'getPlayersRankingsSEA', 'uses' => 'PlayerRankingController@getPlayersRankingsSEA']);
+//Route::get('/getPlayersRankingsChina', ['as' => 'getPlayersRankingsChina', 'uses' => 'PlayerRankingController@getPlayersRankingsChina']);
 
 
 
@@ -49,39 +49,36 @@ Route::post('password/email', ['as' => 'password.email', 'middleware' => 'thrott
 Route::get('password/reset/{token}', ['as' => 'password.reset.token', 'uses' => 'Auth\ResetPasswordController@showResetForm']);
 Route::post('password/reset', ['as' => 'password.reset.post', 'middleware' => 'throttle:5', 'uses' => 'Auth\ResetPasswordController@reset']);
 
+Route::middleware(['isActiveUser', 'isAdminUser'])->group(function () {
 
-Route::group(['middleware' => 'isActiveUser'], function () {
-    Route::group(['middleware' => 'isAdminUser'], function () {
-
-        Route::get('admin/dashboard', array('as' => 'admin.dashboard', 'uses' => 'Admin\DashboardController@dashboard'));
+        Route::get('admin/dashboard', ['as' => 'admin.dashboard', 'uses' => 'Admin\DashboardController@dashboard']);
 
 
         // Admin backend TEAMS routes...
-        Route::get('admin/teams', array('as' => 'admin.teams.index', 'uses' => 'Admin\TeamController@index'));
-        Route::get('admin/teams/create', array('as' => 'admin.teams.create', 'uses' => 'Admin\TeamController@create'));
-        Route::post('admin/teams/store', array('as' => 'admin.teams.store', 'uses' => 'Admin\TeamController@store'));
-        Route::delete('admin/teams/destroy', array('as' => 'admin.teams.destroy.all', 'uses' => 'Admin\TeamController@destroyAll'));
-        Route::get('admin/teams/{id}/edit', array('as' => 'admin.teams.edit', 'uses' => 'Admin\TeamController@edit'));
-        Route::patch('admin/teams/{id}/update', array('as' => 'admin.teams.update', 'uses' => 'Admin\TeamController@update'));
-        Route::delete('admin/teams/{id}/destroy', array('as' => 'admin.teams.destroy', 'uses' => 'Admin\TeamController@destroy'));
+        Route::get('admin/teams', ['as' => 'admin.teams.index', 'uses' => 'Admin\TeamController@index']);
+        Route::get('admin/teams/create', ['as' => 'admin.teams.create', 'uses' => 'Admin\TeamController@create']);
+        Route::post('admin/teams/store', ['as' => 'admin.teams.store', 'uses' => 'Admin\TeamController@store']);
+        Route::delete('admin/teams/destroy', ['as' => 'admin.teams.destroy.all', 'uses' => 'Admin\TeamController@destroyAll']);
+        Route::get('admin/teams/{id}/edit', ['as' => 'admin.teams.edit', 'uses' => 'Admin\TeamController@edit']);
+        Route::patch('admin/teams/{id}/update', ['as' => 'admin.teams.update', 'uses' => 'Admin\TeamController@update']);
+        Route::delete('admin/teams/{id}/destroy', ['as' => 'admin.teams.destroy', 'uses' => 'Admin\TeamController@destroy']);
 
         // Admin backend PLAYERS routes...
-        Route::get('admin/players', array('as' => 'admin.players.index', 'uses' => 'Admin\PlayerController@index'));
-        Route::get('admin/players/create', array('as' => 'admin.players.create', 'uses' => 'Admin\PlayerController@create'));
-        Route::post('admin/players/store', array('as' => 'admin.players.store', 'uses' => 'Admin\PlayerController@store'));
-        Route::delete('admin/players/destroy', array('as' => 'admin.players.destroy.all', 'uses' => 'Admin\PlayerController@destroyAll'));
-        Route::get('admin/players/{id}/edit', array('as' => 'admin.players.edit', 'uses' => 'Admin\PlayerController@edit'));
-        Route::patch('admin/players/{id}/update', array('as' => 'admin.players.update', 'uses' => 'Admin\PlayerController@update'));
-        Route::delete('admin/players/{id}/destroy', array('as' => 'admin.players.destroy', 'uses' => 'Admin\PlayerController@destroy'));
+        Route::get('admin/players', ['as' => 'admin.players.index', 'uses' => 'Admin\PlayerController@index']);
+        Route::get('admin/players/create', ['as' => 'admin.players.create', 'uses' => 'Admin\PlayerController@create']);
+        Route::post('admin/players/store', ['as' => 'admin.players.store', 'uses' => 'Admin\PlayerController@store']);
+        Route::delete('admin/players/destroy', ['as' => 'admin.players.destroy.all', 'uses' => 'Admin\PlayerController@destroyAll']);
+        Route::get('admin/players/{id}/edit', ['as' => 'admin.players.edit', 'uses' => 'Admin\PlayerController@edit']);
+        Route::patch('admin/players/{id}/update', ['as' => 'admin.players.update', 'uses' => 'Admin\PlayerController@update']);
+        Route::delete('admin/players/{id}/destroy', ['as' => 'admin.players.destroy', 'uses' => 'Admin\PlayerController@destroy']);
 
         // Admin backend TOURNAMENTS routes...
-        Route::get('admin/tournaments', array('as' => 'admin.tournaments.index', 'uses' => 'Admin\TournamentController@index'));
-        Route::get('admin/tournaments/create', array('as' => 'admin.tournaments.create', 'uses' => 'Admin\TournamentController@create'));
-        Route::post('admin/tournaments/store', array('as' => 'admin.tournaments.store', 'uses' => 'Admin\TournamentController@store'));
-        Route::delete('admin/tournaments/destroy', array('as' => 'admin.tournaments.destroy.all', 'uses' => 'Admin\TournamentController@destroyAll'));
-        Route::get('admin/tournaments/{id}/edit', array('as' => 'admin.tournaments.edit', 'uses' => 'Admin\TournamentController@edit'));
-        Route::patch('admin/tournaments/{id}/update', array('as' => 'admin.tournaments.update', 'uses' => 'Admin\TournamentController@update'));
-        Route::delete('admin/tournaments/{id}/destroy', array('as' => 'admin.tournaments.destroy', 'uses' => 'Admin\TournamentController@destroy'));
+        Route::get('admin/tournaments', ['as' => 'admin.tournaments.index', 'uses' => 'Admin\TournamentController@index']);
+        Route::get('admin/tournaments/create', ['as' => 'admin.tournaments.create', 'uses' => 'Admin\TournamentController@create']);
+        Route::post('admin/tournaments/store', ['as' => 'admin.tournaments.store', 'uses' => 'Admin\TournamentController@store']);
+        Route::delete('admin/tournaments/destroy', ['as' => 'admin.tournaments.destroy.all', 'uses' => 'Admin\TournamentController@destroyAll']);
+        Route::get('admin/tournaments/{id}/edit', ['as' => 'admin.tournaments.edit', 'uses' => 'Admin\TournamentController@edit']);
+        Route::patch('admin/tournaments/{id}/update', ['as' => 'admin.tournaments.update', 'uses' => 'Admin\TournamentController@update']);
+        Route::delete('admin/tournaments/{id}/destroy', ['as' => 'admin.tournaments.destroy', 'uses' => 'Admin\TournamentController@destroy']);
 
-    });
 });

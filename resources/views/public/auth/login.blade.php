@@ -19,9 +19,7 @@
                onfocus="this.placeholder = ''" onblur="this.placeholder = 'Kodeord'" required>
 
         @if ($errors->has('kodeord'))
-
             <strong>{{ $errors->first('kodeord') }}</strong>
-
         @endif
 
         <br />

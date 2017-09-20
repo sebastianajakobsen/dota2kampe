@@ -112,8 +112,6 @@ class MatchCrawlerController extends Controller
 
         // Reanrange the order :)
         $mergeArray = array_values($removeTBD);
-
-
         $i = 0;
         foreach ($mergeArray as $tMatches) {
 
