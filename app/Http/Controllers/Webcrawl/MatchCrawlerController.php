@@ -49,9 +49,10 @@ class MatchCrawlerController extends Controller
         });
 
 
-        $start_time = $crawler->filter('.infobox_matches_content .datetime')->each(function ($node) {
+        $start_time = $crawler->filter('.infobox_matches_content tr:nth-child(2) .match-filler .match-countdown .timer-object')->each(function ($node) {
 
             $start_time = $node->text();
+
 
 
             $start_time = explode(" ", $start_time);

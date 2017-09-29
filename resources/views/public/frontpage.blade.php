@@ -3,7 +3,7 @@
 @section('content')
 
 @foreach($matches as $match)
-    {{$match->team1->name}} vs {{$match->team2->name}} {{$match->start_time}}
+    <img height="40" src="{{asset(env('STORAGE_DISK_PATH')."/teams/".$match->team1->logo)}}">{{$match->team1->name}} vs {{$match->team2->name}} <img height="40" src="{{asset(env('STORAGE_DISK_PATH')."/teams/".$match->team2->logo)}}"> {{$match->start_time}}
     <br />
     @endforeach
 <br /><br />
