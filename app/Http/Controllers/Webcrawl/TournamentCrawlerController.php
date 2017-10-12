@@ -223,7 +223,7 @@ class TournamentCrawlerController extends Controller
             $src = $node->extract('src');
             return 'http://wiki.teamliquid.net' . $src[0];
         });
-        
+
 
         $start_date = $crawler->filter('table:first-of-type tr td:first-child span')->each(function ($node) {
             $start_date = trim(str_replace(' ', '-', $node->text()));
