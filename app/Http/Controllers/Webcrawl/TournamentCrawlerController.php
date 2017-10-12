@@ -47,11 +47,13 @@ class TournamentCrawlerController extends Controller
         });
 
         $start_date = $crawler->filter('table:first-of-type tr td:first-child span')->each(function ($node) {
-            return trim(preg_replace('/\s+/', ' ', $node->text()));
+            $start_date = trim(str_replace(' ', '-', $node->text()));
+            return rtrim($start_date,'-');
         });
 
         $end_date = $crawler->filter('table:first-of-type tr td:nth-child(2) span')->each(function ($node) {
-            return trim(preg_replace('/\s+/', ' ', $node->text()));
+            $end_date = trim(str_replace(' ', '-', $node->text()));
+            return rtrim($end_date,'-');
         });
 
 
@@ -66,7 +68,6 @@ class TournamentCrawlerController extends Controller
 
         // Use the merge arrays functions to merge our arrays together to a new one
         $mergeArray = mergeArrays($name, $logo, $wiki, $title, $start_date, $end_date);
-
 
         $i = 0;
         foreach ($mergeArray as $tournamentInfo) {
@@ -135,11 +136,13 @@ class TournamentCrawlerController extends Controller
         });
 
         $start_date = $crawler->filter('table:first-of-type tr td:first-child span')->each(function ($node) {
-            return trim(preg_replace('/\s+/', ' ', $node->text()));
+            $start_date = trim(str_replace(' ', '-', $node->text()));
+            return rtrim($start_date,'-');
         });
 
         $end_date = $crawler->filter('table:first-of-type tr td:nth-child(2) span')->each(function ($node) {
-            return trim(preg_replace('/\s+/', ' ', $node->text()));
+            $end_date = trim(str_replace(' ', '-', $node->text()));
+            return rtrim($end_date,'-');
         });
 
 
@@ -154,7 +157,6 @@ class TournamentCrawlerController extends Controller
 
         // Use the merge arrays functions to merge our arrays together to a new one
         $mergeArray = mergeArrays($name, $logo, $wiki, $title, $start_date, $end_date);
-
         $i = 0;
         foreach ($mergeArray as $tournamentInfo) {
 
@@ -221,17 +223,18 @@ class TournamentCrawlerController extends Controller
             $src = $node->extract('src');
             return 'http://wiki.teamliquid.net' . $src[0];
         });
-
-        dd($logo);
-
+        
 
         $start_date = $crawler->filter('table:first-of-type tr td:first-child span')->each(function ($node) {
-            return trim(preg_replace('/\s+/', ' ', $node->text()));
+            $start_date = trim(str_replace(' ', '-', $node->text()));
+            return rtrim($start_date,'-');
         });
 
         $end_date = $crawler->filter('table:first-of-type tr td:nth-child(2) span')->each(function ($node) {
-            return trim(preg_replace('/\s+/', ' ', $node->text()));
+            $end_date = trim(str_replace(' ', '-', $node->text()));
+            return rtrim($end_date,'-');
         });
+
 
 
         // Merge arrays functions
@@ -314,12 +317,15 @@ class TournamentCrawlerController extends Controller
         });
 
         $start_date = $crawler->filter('table:first-of-type tr td:first-child span')->each(function ($node) {
-            return trim(preg_replace('/\s+/', ' ', $node->text()));
+            $start_date = trim(str_replace(' ', '-', $node->text()));
+            return rtrim($start_date,'-');
         });
 
         $end_date = $crawler->filter('table:first-of-type tr td:nth-child(2) span')->each(function ($node) {
-            return trim(preg_replace('/\s+/', ' ', $node->text()));
+            $end_date = trim(str_replace(' ', '-', $node->text()));
+            return rtrim($end_date,'-');
         });
+
 
 
         // Merge arrays functions
