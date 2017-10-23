@@ -26,6 +26,8 @@ Route::get('/crawlPlayers', ['as' => 'crawlPlayers', 'uses' => 'Webcrawl\PlayerC
 Route::get('/crawlPlayersImage', ['as' => 'crawlPlayersImage', 'uses' => 'Webcrawl\PlayerCrawlerController@crawlPlayersImage']);
 Route::get('/crawlPlayersMMR', ['as' => 'crawlPlayersMMR', 'uses' => 'Webcrawl\PlayerCrawlerController@crawlPlayersMMR']);
 
+Route::get('/crawlLiveScore', ['as' => 'crawlLiveScore', 'uses' => 'Webcrawl\LiveScoreController@crawlLiveScore']);
+
 // Players >Rankings controller
 //Route::get('/getPlayersRankingsAmericas', ['as' => 'getPlayersRankingsAmericas', 'uses' => 'PlayerRankingController@getPlayersRankingsAmericas']);
 //Route::get('/getPlayersRankingsEurope', ['as' => 'getPlayersRankingsEurope', 'uses' => 'PlayerRankingController@getPlayersRankingsEurope']);

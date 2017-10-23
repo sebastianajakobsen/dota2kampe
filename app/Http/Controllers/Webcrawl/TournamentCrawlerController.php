@@ -202,35 +202,35 @@ class TournamentCrawlerController extends Controller
 
         // Go to the wiki.teamliquid.net team page
         $crawler = $client->request('GET', 'http://wiki.teamliquid.net/dota2/Minor_Tournaments');
-        $name = $crawler->filter('table:first-of-type tr td:nth-child(3)')->each(function ($node) {
+        $name = $crawler->filter('table tr td:nth-child(3)')->each(function ($node) {
             return trim(preg_replace('/\s+/', ' ', $node->text()));
         });
 
 
-        $title = $crawler->filter('table:first-of-type tr td:nth-child(3) a')->each(function ($node) {
+        $title = $crawler->filter('table tr td:nth-child(3) a')->each(function ($node) {
             $title = $node->extract('title');
             return $title[0];
         });
 
 
-        $wiki = $crawler->filter('table:first-of-type tr td:nth-child(3) a')->each(function ($node) {
+        $wiki = $crawler->filter('table tr td:nth-child(3) a')->each(function ($node) {
             $href = $node->extract('href');
             return 'http://wiki.teamliquid.net' . $href[0];
         });
 
 
-        $logo = $crawler->filter('table:first-of-type tr td:nth-child(4) img')->each(function ($node) {
+        $logo = $crawler->filter('table tr td:nth-child(4) img')->each(function ($node) {
             $src = $node->extract('src');
             return 'http://wiki.teamliquid.net' . $src[0];
         });
 
 
-        $start_date = $crawler->filter('table:first-of-type tr td:first-child span')->each(function ($node) {
+        $start_date = $crawler->filter('table tr td:first-child span')->each(function ($node) {
             $start_date = trim(str_replace(' ', '-', $node->text()));
             return rtrim($start_date,'-');
         });
 
-        $end_date = $crawler->filter('table:first-of-type tr td:nth-child(2) span')->each(function ($node) {
+        $end_date = $crawler->filter('table tr td:nth-child(2) span')->each(function ($node) {
             $end_date = trim(str_replace(' ', '-', $node->text()));
             return rtrim($end_date,'-');
         });

@@ -114,15 +114,18 @@ class MatchCrawlerController extends Controller
         // Reanrange the order :)
         $mergeArray = array_values($removeTBD);
         $i = 0;
+
         foreach ($mergeArray as $tMatches) {
 
 
             $tournament = Tournament::Where('title', $tMatches['tournament'])->first();
+
+
             if ($tournament['title']) {
 
-                $team1 = Team::Where('name', '=', $tMatches['team1'])->first();
-                $team2 = Team::Where('name', '=', $tMatches['team2'])->first();
 
+                $team1 = Team::Where('title', '=', $tMatches['team1'])->first();
+                $team2 = Team::Where('title', '=', $tMatches['team2'])->first();
                 if ($team1 && $team2) {
 
                     // check if match exists !

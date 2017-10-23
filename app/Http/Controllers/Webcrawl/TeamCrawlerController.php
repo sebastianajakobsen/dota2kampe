@@ -57,7 +57,6 @@ class TeamCrawlerController extends Controller
         // Use the merge arrays functions to merge our arrays together to a new one
         $mergeArray = mergeArrays($array1, $array2, $array3, $title);
 
-
         $i = 0;
         // Get value from the merge array and store those value as a new team in DB
         foreach ($mergeArray as $teamInfo) {
